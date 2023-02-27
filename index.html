@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase Web Push</title>
+  </head>
+  <body>
+    <h3>Hello There!</h3>
+
+    <div id="message"></div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+      import {
+        getMessaging,
+        getToken,
+        onMessage,
+      } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-messaging.js";
+
+      // add your credentials here from firebase project console
+      const firebaseConfig = {
+        apiKey: "",
+        authDomain: "",
+        projectId: "",
+        storageBucket: "",
+        messagingSenderId: "",
+        appId: "",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const messaging = getMessaging(app);
+
+      // generating fcm token for user
+      getToken(messaging, {
+        vapidKey:
+          "<your generated key pair's public key form firebase project cloud messaging->web-configuration->generate-key-pair >",
+      }).then((currentToken) => {
+        console.log(currentToken);
+      });
+
+      onMessage(messaging, (payload) => {
+        console.log(payload);
+      });
+    </script>
+  </body>
+</html>
