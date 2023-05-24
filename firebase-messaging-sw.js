@@ -5,13 +5,14 @@ importScripts(
 );
 
 // add your own firebase app credentials here
-firebase.initializeApp({
+const firebaseConfig = {
   apiKey: "",
   authDomain: "",
   projectId: "",
   storageBucket: "",
   messagingSenderId: "",
   appId: "",
-});
+};
 
+firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
